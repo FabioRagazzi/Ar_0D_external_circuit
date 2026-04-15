@@ -47,7 +47,7 @@ stoichiometric_matrix = [1    -1     0     1     0;
                          0    -1     1    -1     0;];
 
 %    [e,    Ar,   Ar2p, Arp, Ars]
-n0 = [1e12, Ngas, 1e9, 1e12, 1e12]';
+n0 = [1e12, Ngas, 0, 1e12, 0]';
 y0 = [n0(:); Vext];
 
 Mass = eye(6);
@@ -74,10 +74,12 @@ loglog(tout,nout(:,3),"LineWidth",2,"Color",colors(4,:),"LineStyle","-","Display
 loglog(tout,nout(:,4),"LineWidth",2,"Color",colors(3,:),"LineStyle","-","DisplayName","Ar^{+}")
 loglog(tout,nout(:,5),"LineWidth",2,"Color",colors(2,:),"LineStyle","-","DisplayName","Ar^{*}")
 ylabel("Number density (cm^{-3})")
+ylim([1e4,1e14])
 yyaxis right
-semilogx(tout,ETdout,"LineWidth",2,"Color","green","LineStyle","--","Color",colors(5,:),"DisplayName","E")
+E_line = semilogx(tout,ETdout,"LineWidth",2,"Color","green","LineStyle","--","Color",colors(5,:),"DisplayName","E","HandleVisibility","off");
 ylabel("Reduced electric field (Td)")
-legend("Location","bestoutside")
+xlabel("Time (s)")
+legend("NumColumns",4)
 grid on
 ax.FontSize = 18;
 ax.YAxis(1).Color = [0 0 0];
